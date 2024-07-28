@@ -8,7 +8,6 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'vue-toastification/dist/index.css'
 
-// import Toast from "vue-toastification"
 import Toast, { POSITION } from 'vue-toastification';
 import { createPinia } from 'pinia'
 

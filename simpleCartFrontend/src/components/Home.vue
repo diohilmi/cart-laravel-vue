@@ -14,10 +14,8 @@ import { onMounted, reactive } from 'vue';
     const fecthAllProducts = async () => {
         try {
             const response = await axios.get("http://127.0.0.1:8000/api/product");
-            console.log(response.data); // Log the entire response data to verify structure
-            data.products = response.data.data.data; // Assign the products array correctly
-            console.log(data.products); // Log to verify the assigned products array
-            // data.products = Object.values(response.data);
+            // console.log(response.data);
+            data.products = response.data.data.data; 
             // console.log(data.products);
         } catch (error) {
             console.log(error);
