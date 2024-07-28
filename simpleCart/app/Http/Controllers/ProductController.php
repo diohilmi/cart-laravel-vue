@@ -10,7 +10,7 @@ class ProductController extends Controller
     //index
     public function index(Request $request)
     {
-        $products = Product::orderBy("id","desc")->paginate(10);
+        $products = Product::orderBy("id","desc")->paginate(9);
         return response()->json([
             'status' => 'success',
             'message' => 'Products retrieved successfully',

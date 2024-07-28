@@ -1,10 +1,10 @@
 <template>
     <div class="row my-4">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card shadow-sm border-0">
                 <div class="card-body">
-                    <table class="table">
-                        <thead>
+                    <table class="table table-hover text-center">
+                        <thead class="tablße-light">
                             <tr>
                                 <th>#</th>
                                 <th>Image</th>
@@ -16,51 +16,42 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="item in store.getCartItems" :key="item.id">
+                            <tr v-for="(item, index) in store.getCartItems" :key="item.id">
+                                <td>{{ index + 1 }}</td>
                                 <td>
-                                    {{ item.id }}
+                                    <img :src="item.image" alt="Product Image" class="img-fluid rounded" width="40" height="40">
                                 </td>
+                                <td>{{ item.name }}</td>
                                 <td>
-                                    <img :src="item.image" 
-                                        alt="Product Image" class="fluid rounded"
-                                        width="60" height="60">
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-link p-0" @click="store.incrementQ(item)">
+                                            <i class="bi bi-caret-up"></i>
+                                        </button>
+                                        <span class="mx-2">{{ item.quantity }}</span>
+                                        <button class="btn btn-link p-0" @click="store.decrementQ(item)">
+                                            <i class="bi bi-caret-down"></i>
+                                        </button>
+                                    </div>
                                 </td>
+                                <td>Rp {{ formatRupiah(item.price) }}</td>
+                                <td>Rp {{ formatRupiah(item.price * item.quantity) }}</td>
                                 <td>
-                                    {{ item.name }}
-                                </td>
-                                <td>
-                                    <i class="bi bi-caret-up"
-                                        @click="store.incrementQ(item)"></i>
-                                        {{ item.quantity }}
-                                    <i class="bi bi-caret-down"
-                                        @click="store.decrementQ(item)"></i>
-                                </td>
-                                <td>
-                                    Rp {{ formatRupiah(item.price) }}
-                                </td>
-                                <td>
-                                    Rp {{ formatRupiah(item.price * item.quantity) }}
-                                </td>
-                                <td>
-                                    <i class="bi bi-cart-x"
-                                        @click="store.removeFromCart(item)"></i>
+                                    <button class="btn btn-link text-danger p-0" @click="store.removeFromCart(item)">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <th colspan="3" class="text-center">
-                                    Total
-                                </th>
-                                <td colspan="3" class="text-center">
-                                    <span class="badge bg-danger rounded-pill fs-5 p-3">
-                                        Rp {{formatRupiah(total)}}
+                            <tr class="table-active">
+                                <th colspan="5" class="text-center" >Total</th>
+                                <td class="text-center">
+                                    <span class="badge bg-danger rounded-pill fs-6 p-3">
+                                        Rp {{ formatRupiah(total) }}
                                     </span>
                                 </td>
+                                <td></td>
                             </tr>
                         </tbody>
                     </table>
-                    <div v-if="total > 0">
-                        <Stripe />
-                    </div>
                 </div>
             </div>
         </div>
